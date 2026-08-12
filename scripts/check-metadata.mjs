@@ -1,14 +1,14 @@
 import { readFile } from "node:fs/promises";
+import { resolveVersion } from "./release-version.mjs";
 
 const root = new URL("../", import.meta.url);
 const packageJson = JSON.parse(await readFile(new URL("package.json", root), "utf8"));
 const artifact = await readFile(new URL("dist/rocket-chat-markdown-plus.user.js", root), "utf8");
 const version = artifact.match(/^\/\/ @version\s+(\S+)$/m)?.[1];
+const expectedVersion = resolveVersion(packageJson.version);
 
-if (version !== packageJson.version) {
-  throw new Error(
-    `Metadata version ${version ?? "missing"} does not match ${packageJson.version}.`,
-  );
+if (version !== expectedVersion) {
+  throw new Error(`Metadata version ${version ?? "missing"} does not match ${expectedVersion}.`);
 }
 for (const match of ["https://*/*", "http://localhost/*", "http://127.0.0.1/*"]) {
   if (!artifact.includes(`// @match        ${match}`)) {

@@ -23,28 +23,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate tag and package version
+      - name: Validate release tag
         shell: bash
         env:
           RELEASE_TAG: ${{ github.ref_name }}
         run: |
           set -euo pipefail
-          PACKAGE_VERSION="$(node -p 'require("./package.json").version')"
-          test "${RELEASE_TAG}" = "v${PACKAGE_VERSION}" || {
-            echo "Tag ${RELEASE_TAG} does not match package version ${PACKAGE_VERSION}." >&2
+          [[ "${RELEASE_TAG}" =~ ^v[0-9]+\.[0-9]+\.[0-9]+([-.][0-9A-Za-z.-]+)?$ ]] || {
+            echo "Tag ${RELEASE_TAG} must use the vX.Y.Z format." >&2
             exit 1
           }
 
       - name: Test and build
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
         run: |
           npm run lint
           npm run typecheck
           npm test
           npm run build
           npm run check:metadata
-
-      - name: Verify committed artifact
-        run: git diff --exit-code -- dist/rocket-chat-markdown-plus.user.js
 
       - name: Prepare release assets
         run: |

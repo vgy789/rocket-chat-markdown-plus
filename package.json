@@ -1,6 +1,6 @@
 {
   "name": "rocket-chat-markdown-plus",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "private": true,
   "description": "Callout markup for any Rocket.Chat web composer",
   "license": "MIT",

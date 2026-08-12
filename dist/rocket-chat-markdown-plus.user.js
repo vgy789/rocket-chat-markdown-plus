@@ -2,7 +2,7 @@
 // @name         Rocket.Chat Markdown+
 // @name:ru      Rocket.Chat Markdown+
 // @namespace    https://github.com/vgy789/rocket-chat-markdown-plus
-// @version      1.0.1
+// @version      1.0.0
 // @description  Add callout blocks to any Rocket.Chat web composer.
 // @description:ru Добавляет callout-блоки в веб-редактор Rocket.Chat.
 // @author       vgy789

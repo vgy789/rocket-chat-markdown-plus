@@ -1,11 +1,13 @@
 import { readFile, mkdir } from "node:fs/promises";
 import { build } from "esbuild";
+import { resolveVersion } from "./release-version.mjs";
 
 const root = new URL("../", import.meta.url);
 const packageJson = JSON.parse(await readFile(new URL("package.json", root), "utf8"));
+const version = resolveVersion(packageJson.version);
 const metadata = (await readFile(new URL("userscript.meta.txt", root), "utf8")).replaceAll(
   "__VERSION__",
-  packageJson.version,
+  version,
 );
 
 await mkdir(new URL("dist", root), { recursive: true });

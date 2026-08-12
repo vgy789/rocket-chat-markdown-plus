@@ -11,7 +11,15 @@ Color-coded warnings, notes, and status blocks for the Rocket.Chat web client.
 2. Open the [**userscript**](https://raw.githubusercontent.com/vgy789/rocket-chat-markdown-plus/main/dist/rocket-chat-markdown-plus.user.js) and confirm installation.
 3. Reload Rocket.Chat — a `::+` button will appear beside the composer.
 
-> On Chromium 138+, enable “Allow User Scripts” for Tampermonkey on the extensions page.
+### Chromium
+
+Copy `chrome://extensions` into the address bar and open **Tampermonkey → Details**. Enable **Allow User Scripts**. If Tampermonkey was installed with **Load unpacked**, also enable **Developer mode** on the extensions page.
+
+### Firefox
+
+No additional setup is normally required.
+
+If the button is missing, make sure Tampermonkey and `Rocket.Chat Markdown+` are enabled.
 
 ## Usage
 

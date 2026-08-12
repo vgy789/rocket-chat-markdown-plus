@@ -1,0 +1,60 @@
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate tag and package version
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          PACKAGE_VERSION="$(node -p 'require("./package.json").version')"
+          test "${RELEASE_TAG}" = "v${PACKAGE_VERSION}" || {
+            echo "Tag ${RELEASE_TAG} does not match package version ${PACKAGE_VERSION}." >&2
+            exit 1
+          }
+
+      - name: Test and build
+        run: |
+          npm run lint
+          npm run typecheck
+          npm test
+          npm run build
+          npm run check:metadata
+
+      - name: Verify committed artifact
+        run: git diff --exit-code -- dist/rocket-chat-markdown-plus.user.js
+
+      - name: Prepare release assets
+        run: |
+          cp dist/rocket-chat-markdown-plus.user.js rocket-chat-markdown-plus.user.js
+          sha256sum rocket-chat-markdown-plus.user.js > rocket-chat-markdown-plus.user.js.sha256
+
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          generate_release_notes: true
+          files: |
+            rocket-chat-markdown-plus.user.js
+            rocket-chat-markdown-plus.user.js.sha256

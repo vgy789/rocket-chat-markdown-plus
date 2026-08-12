@@ -1,0 +1,20 @@
+// ==UserScript==
+// @name         Rocket.Chat Markdown+
+// @name:ru      Rocket.Chat Markdown+
+// @namespace    https://github.com/vgy789/rocket-chat-markdown-plus
+// @version      __VERSION__
+// @description  Add callout blocks to any Rocket.Chat web composer.
+// @description:ru Добавляет callout-блоки в веб-редактор Rocket.Chat.
+// @author       vgy789
+// @license      MIT
+// @homepageURL  https://github.com/vgy789/rocket-chat-markdown-plus
+// @supportURL   https://github.com/vgy789/rocket-chat-markdown-plus/issues
+// @downloadURL  https://raw.githubusercontent.com/vgy789/rocket-chat-markdown-plus/main/dist/rocket-chat-markdown-plus.user.js
+// @updateURL    https://raw.githubusercontent.com/vgy789/rocket-chat-markdown-plus/main/dist/rocket-chat-markdown-plus.user.js
+// @match        https://*/*
+// @match        http://localhost/*
+// @match        http://127.0.0.1/*
+// @grant        none
+// @run-at       document-idle
+// @noframes
+// ==/UserScript==

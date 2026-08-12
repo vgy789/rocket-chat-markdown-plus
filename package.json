@@ -1,0 +1,39 @@
+{
+  "name": "rocket-chat-markdown-plus",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Callout markup for any Rocket.Chat web composer",
+  "license": "MIT",
+  "author": "vgy789",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "check:dist": "npm run build && git diff --exit-code -- dist/rocket-chat-markdown-plus.user.js",
+    "check:metadata": "node scripts/check-metadata.mjs",
+    "format": "npm run format:code && npm run format:markdown",
+    "format:check": "npm run format:code:check && npm run format:markdown:check",
+    "format:code": "biome format --write .",
+    "format:code:check": "biome format .",
+    "format:markdown": "prettier --write README.md README.en.md CONTRIBUTING.md \"docs/**/*.md\" \".github/*.md\"",
+    "format:markdown:check": "prettier --check README.md README.en.md CONTRIBUTING.md \"docs/**/*.md\" \".github/*.md\"",
+    "lint": "biome lint .",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:e2e": "npm run build && playwright test",
+    "test:compat": "node scripts/test-compat.mjs",
+    "screenshot": "node scripts/capture-showcase.mjs",
+    "verify": "npm run format:check && npm run lint && npm run typecheck && npm test && npm run build && npm run check:metadata && npm run test:e2e"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.5.8",
+    "@playwright/test": "1.62.1",
+    "@types/node": "22.20.1",
+    "esbuild": "0.28.2",
+    "prettier": "3.9.6",
+    "typescript": "7.0.2",
+    "vitest": "4.1.10"
+  }
+}

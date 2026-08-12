@@ -5,6 +5,13 @@ Color-coded warnings, notes, and status blocks for the Rocket.Chat web client.
 [**Install userscript**](https://raw.githubusercontent.com/vgy789/rocket-chat-markdown-plus/main/dist/rocket-chat-markdown-plus.user.js)
 · [Syntax](./docs/SYNTAX.md) · [Русский](./README.md)
 
+<table>
+  <tr>
+    <td><img src="docs/images/rocket-chat-markdown-plus-demo.webp" alt="Rocket.Chat Markdown+ demo" width="480"></td>
+    <td><img src="docs/images/rocket-chat-markdown-plus-form.png" alt="Message styling form" width="220"></td>
+  </tr>
+</table>
+
 ## Install
 
 1. Install [Tampermonkey](https://www.tampermonkey.net/) in Chromium or Firefox.
@@ -35,16 +42,9 @@ The service will be unavailable for **15 minutes**.
 
 Text outside `:::` remains a regular message. Available types are `warning`, `info`, `success`, `error`, and `note`. The `::+` button opens one form: choose a preset, optionally edit its title, color, and additional fields, then press **Insert**. See the [syntax reference](./docs/SYNTAX.md) for all options.
 
-The userscript runs locally, with no analytics or external backend. For messages with attachments it uses the current Rocket.Chat session only immediately before a same-origin request and does not store the token.
-
-Version 1.x supports Chromium and Firefox with Tampermonkey and the standard Rocket.Chat web client. The userscript runs on HTTPS sites and on `localhost`/`127.0.0.1`; it stays inactive on ordinary pages and does not read session data there. E2EE rooms are not supported yet.
-
-Run `npm run test:compat` to test against real Rocket.Chat Docker versions locally. The pinned versions and MongoDB requirements are documented in the [compatibility guide](./docs/COMPATIBILITY.md).
+The userscript runs locally, with no analytics or external backend.
 
 [Privacy](./.github/PRIVACY.md) · [Security](./.github/SECURITY.md) ·
 [Development](./CONTRIBUTING.md) · [Report an issue](https://github.com/vgy789/rocket-chat-markdown-plus/issues)
-
-> [!IMPORTANT]
-> This independent project is not affiliated with Rocket.Chat.
 
 [MIT](./LICENSE)
